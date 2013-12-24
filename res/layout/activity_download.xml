@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="@color/darkgrey"
+    tools:context=".DownloadActivity" >
+    
+    <LinearLayout
+        android:id="@+id/downuploadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/uploadsImg"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/upload" />
+
+        <TextView
+            android:id="@+id/uloadTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UPLOAD"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/green" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/wasawas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical" >
+        
+         <ImageView
+            android:id="@+id/dmIconImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/download2" />
+         
+
+        <TextView
+            android:id="@+id/EdittEXTinto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Type file name you want to download.."
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/fileNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginTop="5dp"
+            android:background="#44e5e5e5"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:ems="10" >
+        </EditText>
+        
+        
+        <Button
+            android:id="@+id/downloadBtntn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:padding="10dp"
+            android:background="@color/yellow"
+            android:text="Download and Save"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>
