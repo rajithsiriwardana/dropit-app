@@ -1,28 +1,44 @@
 package com.dropit;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DropItPacket implements Serializable {
 
-	private String METHOD = "STORE";
-	private String FILE_NAME = "";
+	private String METHOD = "";
+	private Map<String, String> values;
 	private byte[] DATA;
-	
+
+	public DropItPacket(String methodname) {
+		METHOD = methodname;
+		values = new HashMap();
+	}
+
 	public String getMETHOD() {
 		return METHOD;
 	}
-	public void setMETHOD(String mETHOD) {
-		METHOD = mETHOD;
+	
+	
+	public void setMETHOD(String m) {
+		this.METHOD = m;
 	}
-	public String getFILE_NAME() {
-		return FILE_NAME;
+
+	public void setKeyValue(String key, String value) {
+		values.put(key, value);
 	}
-	public void setFILE_NAME(String fILE_NAME) {
-		FILE_NAME = fILE_NAME;
+
+	public String getKeyValue(String key) {
+		if (values.containsKey(key)) {
+			return values.get(key);
+		}
+		return "";
 	}
+
 	public byte[] getDATA() {
 		return DATA;
 	}
+
 	public void setDATA(byte[] dATA) {
 		DATA = dATA;
 	}
