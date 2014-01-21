@@ -2,9 +2,11 @@ package com.dropit;
 
 import java.io.File;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -55,6 +57,7 @@ public class DownloadActivity extends Activity {
 
 		downloadBtn = (Button) findViewById(R.id.downloadBtntn);
 		downloadBtn.setTypeface(typeface);
+		
 
 		fileNameEditText = (EditText) findViewById(R.id.fileNameEditText);
 		fileNameEditText.setTypeface(typeface);
@@ -78,10 +81,12 @@ public class DownloadActivity extends Activity {
 				startActivity(in);
 			}
 		});
+		
 	}
 
 	class downloadTask extends AsyncTask<Void, Void, Void> {
 
+		@SuppressLint("NewApi")
 		@Override
 		protected Void doInBackground(Void... params) {
 

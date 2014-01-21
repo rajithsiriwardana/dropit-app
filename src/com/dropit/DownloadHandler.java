@@ -13,8 +13,8 @@ import android.util.Log;
 
 public class DownloadHandler {
 
-	private String IP = "192.248.8.245";
-	private int PORT = 8000;
+	private String IP = Utils.IP;
+	private int PORT = Utils.PORT;
 	
 	@SuppressLint("NewApi")
 	public DownloadHandler() {
@@ -86,6 +86,20 @@ public class DownloadHandler {
 		
 		FileOutputStream stream = new FileOutputStream(file); 
         stream.write(data); 
+		
+		}catch(Exception e){
+			Log.d("Pahan", "ERROR " + e.getMessage());
+		}
+	}
+	
+	private void testTransaction(){
+		
+		try {
+			
+		
+		Socket clientSocket = new Socket(IP, PORT);
+		ObjectOutputStream outToServer = new ObjectOutputStream(
+				clientSocket.getOutputStream());
 		
 		}catch(Exception e){
 			Log.d("Pahan", "ERROR " + e.getMessage());

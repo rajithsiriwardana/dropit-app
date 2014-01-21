@@ -14,8 +14,8 @@ public class UploadHandler {
 
 	private FileInputStream fileInputStream;
 	private BufferedInputStream bufferedInputStream;
-	private String IP = "192.248.8.245";
-	private int PORT = 8000; 
+	private String IP = Utils.IP;
+	private int PORT = Utils.PORT;
 	
 	@SuppressLint("NewApi")
 	public UploadHandler() {
@@ -28,6 +28,7 @@ public class UploadHandler {
 
 	public boolean uploadFile(String filepath) {
  
+		boolean status = false;
 		try {
 
 			File file = new File(filepath);
@@ -68,11 +69,11 @@ public class UploadHandler {
 			}
 			
 			clientSocket.close();
-
+			status = true;
 		} catch (Exception e) {
 			Log.d("Pahan", "ERROR " + e.getMessage());
 		}
 		
-		return true;
+		return status;
 	}
 }

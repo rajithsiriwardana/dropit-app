@@ -1,9 +1,15 @@
 package com.dropit;
 
+import java.net.URISyntaxException;
+
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UploadActivity extends Activity {
 
@@ -65,7 +72,7 @@ public class UploadActivity extends Activity {
 			public void onClick(View v) {
 
 				Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
-				 fileintent.setType("file/*"); 
+				 fileintent.setType("*/*"); 
 				try {
 					startActivityForResult(fileintent, 123);
 				} catch (Exception e) {
@@ -97,8 +104,7 @@ public class UploadActivity extends Activity {
 		switch (requestCode) {
 		case 123:
 			if (resultCode == RESULT_OK) {
-				String filePath = data.getData().getPath();
-				fileNameText.setText(filePath);
+				fileNameText.setText(getPath(UploadActivity.this, data.getData()));
 				fileIconImg.setImageDrawable(getResources().getDrawable(
 						R.drawable.file));
 				uploadBtn.setText("Upload and Share");
@@ -106,14 +112,36 @@ public class UploadActivity extends Activity {
 			}
 		}
 	}
+	
+	private String getPath(Context context, Uri uri){
+		
+	    if ("content".equalsIgnoreCase(uri.getScheme())) {
+	        String[] projection = { "_data" };
+	        Cursor cursor = null;
 
-	class uploadTask extends AsyncTask<Void, Void, Void> {
+	        try {
+	            cursor = context.getContentResolver().query(uri, projection, null, null, null);
+	            int column_index = cursor.getColumnIndexOrThrow("_data");
+	            if (cursor.moveToFirst()) {
+	                return cursor.getString(column_index);
+	            }
+	        } catch (Exception e) {
+	        	
+	        }
+	    }
+	    else if ("file".equalsIgnoreCase(uri.getScheme())) {
+	        return uri.getPath();
+	    }
+
+	    return "";
+	}
+
+	class uploadTask extends AsyncTask<Void, Void, Boolean> {
 
 		@Override
-		protected Void doInBackground(Void... params) {
-			uploadHandler.uploadFile(fileNameText.getText().toString());
-
-			return null;
+		protected Boolean doInBackground(Void... params) {
+			boolean s = uploadHandler.uploadFile(fileNameText.getText().toString());
+			return s;
 		}
 
 		@Override
@@ -126,12 +154,19 @@ public class UploadActivity extends Activity {
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(Boolean result) {
 			fileIconImg.clearAnimation();
 			uploadBtn.setVisibility(View.GONE);
 			uploadBtn.setEnabled(true);
+			if(result){
 			fileIconImg.setImageDrawable(getResources().getDrawable(
 					R.drawable.upload_ok));
+			}
+			else{
+				fileIconImg.setImageDrawable(getResources().getDrawable(
+						R.drawable.upload_notok));
+				Toast.makeText(UploadActivity.this, "Error while uploading File", Toast.LENGTH_LONG).show();
+			}
 		}
 
 	}

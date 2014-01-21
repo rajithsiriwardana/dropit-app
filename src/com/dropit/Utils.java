@@ -13,4 +13,7 @@ public class Utils {
 	public static String TRANSFER_METHOD = "TRANSFER";
 	
 	public static String DIR_NAME = "Drop It";
+	
+	public static String IP = "192.168.43.218";
+	public static int PORT = 8000;
 }
