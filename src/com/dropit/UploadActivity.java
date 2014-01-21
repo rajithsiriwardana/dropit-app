@@ -65,7 +65,7 @@ public class UploadActivity extends Activity {
 			public void onClick(View v) {
 
 				Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
-				// fileintent.setType("file/*");
+				 fileintent.setType("file/*"); 
 				try {
 					startActivityForResult(fileintent, 123);
 				} catch (Exception e) {

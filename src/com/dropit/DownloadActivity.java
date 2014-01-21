@@ -1,7 +1,10 @@
 package com.dropit;
 
+import java.io.File;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -28,88 +31,93 @@ public class DownloadActivity extends Activity {
 	private TextView introTxt;
 	private Button downloadBtn;
 	private EditText fileNameEditText;
+	private DownloadHandler downloadHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_download);
-		typeface=Typeface.createFromAsset(getAssets(),"fonts/hm.ttf");
+		typeface = Typeface.createFromAsset(getAssets(), "fonts/hm.ttf");
+		downloadHandler = new DownloadHandler();
 		init();
 	}
-	
-	private void init(){
-		
-		uploadText = (TextView)findViewById(R.id.uloadTxt);
+
+	private void init() {
+
+		uploadText = (TextView) findViewById(R.id.uloadTxt);
 		uploadText.setTypeface(typeface);
-		
-		dwloadIconImg = (ImageView)findViewById(R.id.dmIconImg);
-		
-		introTxt = (TextView)findViewById(R.id.EdittEXTinto);
+
+		dwloadIconImg = (ImageView) findViewById(R.id.dmIconImg);
+
+		introTxt = (TextView) findViewById(R.id.EdittEXTinto);
 		introTxt.setTypeface(typeface);
-		
-		downloadBtn = (Button)findViewById(R.id.downloadBtntn);
+
+		downloadBtn = (Button) findViewById(R.id.downloadBtntn);
 		downloadBtn.setTypeface(typeface);
-		
-		fileNameEditText = (EditText)findViewById(R.id.fileNameEditText);
+
+		fileNameEditText = (EditText) findViewById(R.id.fileNameEditText);
 		fileNameEditText.setTypeface(typeface);
-		
+
 		downloadBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				Log.d("Pahan","sdsdsd");
 				new downloadTask().execute();
 			}
 		});
-		
-		uploadBtn = (LinearLayout)findViewById(R.id.downuploadBtn);
+
+		uploadBtn = (LinearLayout) findViewById(R.id.downuploadBtn);
 		uploadBtn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-				Intent in = new Intent(DownloadActivity.this,UploadActivity.class);
+
+				Intent in = new Intent(DownloadActivity.this,
+						UploadActivity.class);
 				startActivity(in);
 			}
 		});
 	}
-	
-	
-	class downloadTask extends AsyncTask<Void, Void, Void>{
+
+	class downloadTask extends AsyncTask<Void, Void, Void> {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+
+			String filenameString = fileNameEditText.getText().toString();
+			if (!filenameString.isEmpty()) {
+				downloadHandler.downloadFile(filenameString);
 			}
+
 			return null;
 		}
-		
+
 		@Override
 		protected void onPreExecute() {
-			dwloadIconImg.setImageDrawable(getResources().getDrawable(R.drawable.loading));
+			dwloadIconImg.setImageDrawable(getResources().getDrawable(
+					R.drawable.loading));
 			downloadBtn.setEnabled(false);
 			introTxt.setText("Please wait while downloading your file.. ");
 			fileNameEditText.setVisibility(View.GONE);
 			downloadBtn.setText("Downloading.....");
 			rotateAnimation(dwloadIconImg);
 		}
-		
+
 		@Override
 		protected void onPostExecute(Void result) {
 			dwloadIconImg.clearAnimation();
 			fileNameEditText.setVisibility(View.VISIBLE);
 			downloadBtn.setEnabled(true);
 			downloadBtn.setText("Download and Save");
-			dwloadIconImg.setImageDrawable(getResources().getDrawable(R.drawable.download2));
-			Toast.makeText(DownloadActivity.this, "downloading finished..", Toast.LENGTH_SHORT).show();
+			dwloadIconImg.setImageDrawable(getResources().getDrawable(
+					R.drawable.download2));
+			Toast.makeText(DownloadActivity.this, "downloading finished..",
+					Toast.LENGTH_SHORT).show();
 		}
-		
+
 	}
-	
+
 	public void rotateAnimation(View v) {
 
 		RotateAnimation rotateAnimation = new RotateAnimation(0, 360,
@@ -121,6 +129,5 @@ public class DownloadActivity extends Activity {
 		rotateAnimation.setRepeatCount(Animation.INFINITE);
 		v.setAnimation(rotateAnimation);
 	}
-
 
 }

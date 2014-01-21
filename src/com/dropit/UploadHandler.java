@@ -14,8 +14,8 @@ public class UploadHandler {
 
 	private FileInputStream fileInputStream;
 	private BufferedInputStream bufferedInputStream;
-	private String IP = "192.168.43.218";
-	private int PORT = 8000;
+	private String IP = "192.248.8.245";
+	private int PORT = 8000; 
 	
 	@SuppressLint("NewApi")
 	public UploadHandler() {
@@ -49,6 +49,9 @@ public class UploadHandler {
 			outToServer.writeObject(putpacket);
 			
 			DropItPacket resputpackt = (DropItPacket) fromServer.readObject();
+			
+			Thread.sleep(500);
+			
 			if(resputpackt.getMETHOD().equals(Utils.RES_PUT_METHOD)){
 				
 				String ip = resputpackt.getKeyValue("NODE_IP");
@@ -61,7 +64,7 @@ public class UploadHandler {
 				DropItPacket storepacket = new DropItPacket(Utils.STORE_METHOD);
 				storepacket.setKeyValue("FILENAME",file.getName());
 				storepacket.setDATA(filedata);
-				outToNodeServer.writeObject(putpacket);
+				outToNodeServer.writeObject(storepacket);
 			}
 			
 			clientSocket.close();
