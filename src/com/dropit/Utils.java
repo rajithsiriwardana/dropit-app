@@ -12,6 +12,10 @@ public class Utils {
 	public static String RETEIEVE_METHOD = "RETRIEVE";
 	public static String TRANSFER_METHOD = "TRANSFER";
 	
+	public static String ATTR_FILENAME = "FILE_NAME";
+	public static String ATTR_NODEIP = "NODE_IP";
+	public static String ATTR_NODEPORT = "NODE_PORT";
+	
 	public static String DIR_NAME = "Drop It";
 	
 	public static String IP = "192.168.43.218";
