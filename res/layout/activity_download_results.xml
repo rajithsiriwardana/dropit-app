@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkgrey"
+    tools:context=".DownloadResultsActivity" >
+    
+        <LinearLayout
+        android:id="@+id/druDownloadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/drdownloadImg"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/download" />
+
+        <TextView
+            android:id="@+id/drdownloadTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOWNLOAD"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/yellow" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/drdownuploadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/druploadsImg"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/upload" />
+
+        <TextView
+            android:id="@+id/druloadTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UPLOAD"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/green" />
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/drfileSelectBtnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/fileIconImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/upload_ok" />
+
+        <TextView
+            android:id="@+id/drfileNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="File Successfully downloaded to +Drop it+ folder"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

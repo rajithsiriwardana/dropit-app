@@ -39,22 +39,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/searchdownuploadBtn"
-        android:layout_below="@+id/listLoadingTxt"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" >
+        android:layout_below="@+id/searchdownuploadBtn"
+        android:layout_margin="20dp">
 
     </ListView>
-
-    <TextView
-        android:id="@+id/listLoadingTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/searchdownuploadBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Loading Search Results"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/yellow" />
 
 </RelativeLayout>

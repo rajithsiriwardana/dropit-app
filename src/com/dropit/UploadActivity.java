@@ -140,7 +140,7 @@ public class UploadActivity extends Activity {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			boolean s = uploadHandler.uploadFile(fileNameText.getText().toString());
+			boolean s = uploadHandler.uploadFile(UploadActivity.this, fileNameText.getText().toString());
 			return s;
 		}
 
@@ -155,18 +155,18 @@ public class UploadActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			fileIconImg.clearAnimation();
-			uploadBtn.setVisibility(View.GONE);
-			uploadBtn.setEnabled(true);
-			if(result){
-			fileIconImg.setImageDrawable(getResources().getDrawable(
-					R.drawable.upload_ok));
-			}
-			else{
-				fileIconImg.setImageDrawable(getResources().getDrawable(
-						R.drawable.upload_notok));
-				Toast.makeText(UploadActivity.this, "Error while uploading File", Toast.LENGTH_LONG).show();
-			}
+//			fileIconImg.clearAnimation();
+//			uploadBtn.setVisibility(View.GONE);
+//			uploadBtn.setEnabled(true);
+//			if(result){
+//			fileIconImg.setImageDrawable(getResources().getDrawable(
+//					R.drawable.upload_ok));
+//			}
+//			else{
+//				fileIconImg.setImageDrawable(getResources().getDrawable(
+//						R.drawable.upload_notok));
+//				Toast.makeText(UploadActivity.this, "Error while uploading File", Toast.LENGTH_LONG).show();
+//			}
 		}
 
 	}

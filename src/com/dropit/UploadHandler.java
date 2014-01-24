@@ -27,6 +27,7 @@ import org.jboss.netty.handler.codec.serialization.CompatibleObjectEncoder;
 import com.anghiari.dropit.commons.DropItPacket;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -46,15 +47,29 @@ public class UploadHandler {
 
 	}
 
-	public boolean uploadFile(String filepath) {
+	public boolean uploadFile(final Context c, String filepath) {
 
 		boolean status = false;
 		try {
 
 			File file = new File(filepath);
 
-			ClientBootstrap clientBootstrap = ChannelHandler
-					.getChannelHandler().getClientBootstrap();
+//			ClientBootstrap clientBootstrap = ChannelHandler
+//					.getChannelHandler().getClientBootstrap();
+			
+			Executor bossPool = Executors.newCachedThreadPool();
+	        Executor workerPool = Executors.newCachedThreadPool();
+	        ChannelFactory channelFactory = new NioClientSocketChannelFactory(bossPool, workerPool);
+	        ChannelPipelineFactory pipelineFactory = new ChannelPipelineFactory() {
+	            public ChannelPipeline getPipeline() throws Exception {
+	                return Channels.pipeline(
+	                        new CompatibleObjectEncoder(), 
+	                        new CompatibleObjectDecoder(),//(ClassResolvers.cacheDisabled(getClass().getClassLoader())),//ObjectDecoder might not work if the client side is not using netty ObjectDecoder for decoding.
+	                        new UploadResponseHandler(c));
+	            }
+	        };
+	        ClientBootstrap clientBootstrap = new ClientBootstrap(channelFactory);
+	        clientBootstrap.setPipelineFactory(pipelineFactory);
 				        
 
 			InetSocketAddress addressToConnectTo = new InetSocketAddress(IP,

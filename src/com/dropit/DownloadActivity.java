@@ -33,7 +33,7 @@ public class DownloadActivity extends Activity {
 	private TextView introTxt;
 	private Button downloadBtn;
 	private EditText fileNameEditText;
-	private DownloadHandler downloadHandler;
+	private SearchHandler searchHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class DownloadActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_download);
 		typeface = Typeface.createFromAsset(getAssets(), "fonts/hm.ttf");
-		downloadHandler = new DownloadHandler();
+		searchHandler = new SearchHandler();
 		init();
 	}
 
@@ -66,9 +66,7 @@ public class DownloadActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent in = new Intent(DownloadActivity.this,SearchActivity.class);
-				startActivity(in);
-				//new downloadTask().execute();
+				new downloadTask().execute();
 			}
 		});
 
@@ -94,7 +92,7 @@ public class DownloadActivity extends Activity {
 
 			String filenameString = fileNameEditText.getText().toString();
 			if (!filenameString.isEmpty()) {
-				downloadHandler.downloadFile(filenameString);
+				searchHandler.searchFile(DownloadActivity.this, filenameString);
 			}
 
 			return null;
@@ -107,20 +105,20 @@ public class DownloadActivity extends Activity {
 			downloadBtn.setEnabled(false);
 			introTxt.setText("Please wait while downloading your file.. ");
 			fileNameEditText.setVisibility(View.GONE);
-			downloadBtn.setText("Downloading.....");
+			downloadBtn.setText("Searching.....");
 			rotateAnimation(dwloadIconImg);
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
-			dwloadIconImg.clearAnimation();
-			fileNameEditText.setVisibility(View.VISIBLE);
-			downloadBtn.setEnabled(true);
-			downloadBtn.setText("Download and Save");
-			dwloadIconImg.setImageDrawable(getResources().getDrawable(
-					R.drawable.download2));
-			Toast.makeText(DownloadActivity.this, "downloading finished..",
-					Toast.LENGTH_SHORT).show();
+//			dwloadIconImg.clearAnimation();
+//			fileNameEditText.setVisibility(View.VISIBLE);
+//			downloadBtn.setEnabled(true);
+//			downloadBtn.setText("Download and Save");
+//			dwloadIconImg.setImageDrawable(getResources().getDrawable(
+//					R.drawable.download2));
+//			Toast.makeText(DownloadActivity.this, "downloading finished..",
+//					Toast.LENGTH_SHORT).show();
 		}
 
 	}

@@ -17,5 +17,7 @@
     <string name="title_activity_upload">UploadActivity</string>
     <string name="title_activity_download">DownloadActivity</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_upload_results">UploadResultsActivity</string>
+    <string name="title_activity_download_results">DownloadResultsActivity</string>
 
 </resources>

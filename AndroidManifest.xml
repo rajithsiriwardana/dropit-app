@@ -32,15 +32,25 @@
         </activity>
         <activity
             android:name="com.dropit.UploadActivity"
+            android:noHistory="true"
             android:label="@string/title_activity_upload" >
         </activity>
         <activity
             android:name="com.dropit.DownloadActivity"
+            android:noHistory="true"
             android:label="@string/title_activity_download" >
         </activity>
         <activity
             android:name="com.dropit.SearchActivity"
             android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name="com.dropit.UploadResultsActivity"
+            android:label="@string/title_activity_upload_results" >
+        </activity>
+        <activity
+            android:name="com.dropit.DownloadResultsActivity"
+            android:label="@string/title_activity_download_results" >
         </activity>
     </application>
 

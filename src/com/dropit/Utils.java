@@ -23,5 +23,5 @@ public class Utils {
 	//public static String IP = "10.8.108.119";
 	//public static String IP = "192.168.43.173"; //234
 	public static String IP = "192.168.43.234";
-	public static int PORT = 14500; 
+	public static int PORT = 13500; 
 }
