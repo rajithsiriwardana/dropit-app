@@ -38,6 +38,10 @@
             android:name="com.dropit.DownloadActivity"
             android:label="@string/title_activity_download" >
         </activity>
+        <activity
+            android:name="com.dropit.SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
     </application>
 
 </manifest>

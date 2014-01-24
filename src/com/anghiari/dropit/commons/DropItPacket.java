@@ -2,13 +2,14 @@ package com.anghiari.dropit.commons;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
+
+import android.util.Log;
 
 public class DropItPacket implements Serializable {
 
 	 /*Specifies whether the connection is for a get, put or delete*/
     private String method;
-
+    private byte[] data;
     /*Filename of the file object being handled*/
     private HashMap<String, Object> attrib;
 
@@ -22,6 +23,7 @@ public class DropItPacket implements Serializable {
     }
 
     public Object getAttribute(String key){
+    	
         return attrib.get(key);
     }
 
@@ -31,6 +33,15 @@ public class DropItPacket implements Serializable {
             return true;
         }
         return false;
+    }
+    
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
     }
 	
 }

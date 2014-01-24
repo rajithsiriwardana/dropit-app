@@ -66,7 +66,9 @@ public class DownloadActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				new downloadTask().execute();
+				Intent in = new Intent(DownloadActivity.this,SearchActivity.class);
+				startActivity(in);
+				//new downloadTask().execute();
 			}
 		});
 

@@ -20,7 +20,7 @@ public class ChannelHandler {
 	}
 
 	public static ChannelHandler getChannelHandler() {
-		if (handler != null) {
+		if (handler == null) {
 			handler = new ChannelHandler();
 		}
 		return handler;
@@ -34,7 +34,7 @@ public class ChannelHandler {
         ChannelPipelineFactory pipelineFactory = new ChannelPipelineFactory() {
             public ChannelPipeline getPipeline() throws Exception {
                 return Channels.pipeline(
-                        new CompatibleObjectEncoder(),
+                        new CompatibleObjectEncoder(), 
                         new CompatibleObjectDecoder(),//(ClassResolvers.cacheDisabled(getClass().getClassLoader())),//ObjectDecoder might not work if the client side is not using netty ObjectDecoder for decoding.
                         new ClientHandler());
             }
