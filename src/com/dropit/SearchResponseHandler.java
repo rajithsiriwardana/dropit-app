@@ -21,7 +21,7 @@ public class SearchResponseHandler extends SimpleChannelUpstreamHandler {
 	}
 
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e)
-			throws Exception {
+			throws Exception {	
 
 		DropItPacket pkt = (DropItPacket) e.getMessage();
 		String method = pkt.getMethod();

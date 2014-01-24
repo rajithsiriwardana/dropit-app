@@ -72,7 +72,7 @@ public class UploadActivity extends Activity {
 			public void onClick(View v) {
 
 				Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
-				 fileintent.setType("*/*"); 
+				fileintent.setType("*/*");
 				try {
 					startActivityForResult(fileintent, 123);
 				} catch (Exception e) {
@@ -99,12 +99,14 @@ public class UploadActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		if (data == null)
+		if (data == null) {
 			return;
+		}
 		switch (requestCode) {
 		case 123:
 			if (resultCode == RESULT_OK) {
-				fileNameText.setText(getPath(UploadActivity.this, data.getData()));
+				fileNameText.setText(getPath(UploadActivity.this,
+						data.getData()));
 				fileIconImg.setImageDrawable(getResources().getDrawable(
 						R.drawable.file));
 				uploadBtn.setText("Upload and Share");
@@ -112,35 +114,36 @@ public class UploadActivity extends Activity {
 			}
 		}
 	}
-	
-	private String getPath(Context context, Uri uri){
-		
-	    if ("content".equalsIgnoreCase(uri.getScheme())) {
-	        String[] projection = { "_data" };
-	        Cursor cursor = null;
 
-	        try {
-	            cursor = context.getContentResolver().query(uri, projection, null, null, null);
-	            int column_index = cursor.getColumnIndexOrThrow("_data");
-	            if (cursor.moveToFirst()) {
-	                return cursor.getString(column_index);
-	            }
-	        } catch (Exception e) {
-	        	
-	        }
-	    }
-	    else if ("file".equalsIgnoreCase(uri.getScheme())) {
-	        return uri.getPath();
-	    }
+	private String getPath(Context context, Uri uri) {
 
-	    return "";
+		if ("content".equalsIgnoreCase(uri.getScheme())) {
+			String[] projection = { "_data" };
+			Cursor cursor = null;
+
+			try {
+				cursor = context.getContentResolver().query(uri, projection,
+						null, null, null);
+				int column_index = cursor.getColumnIndexOrThrow("_data");
+				if (cursor.moveToFirst()) {
+					return cursor.getString(column_index);
+				}
+			} catch (Exception e) {
+
+			}
+		} else if ("file".equalsIgnoreCase(uri.getScheme())) {
+			return uri.getPath();
+		}
+
+		return "";
 	}
 
 	class uploadTask extends AsyncTask<Void, Void, Boolean> {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			boolean s = uploadHandler.uploadFile(UploadActivity.this, fileNameText.getText().toString());
+			boolean s = uploadHandler.uploadFile(UploadActivity.this,
+					fileNameText.getText().toString());
 			return s;
 		}
 
@@ -155,18 +158,19 @@ public class UploadActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-//			fileIconImg.clearAnimation();
-//			uploadBtn.setVisibility(View.GONE);
-//			uploadBtn.setEnabled(true);
-//			if(result){
-//			fileIconImg.setImageDrawable(getResources().getDrawable(
-//					R.drawable.upload_ok));
-//			}
-//			else{
-//				fileIconImg.setImageDrawable(getResources().getDrawable(
-//						R.drawable.upload_notok));
-//				Toast.makeText(UploadActivity.this, "Error while uploading File", Toast.LENGTH_LONG).show();
-//			}
+			// fileIconImg.clearAnimation();
+			// uploadBtn.setVisibility(View.GONE);
+			// uploadBtn.setEnabled(true);
+			// if(result){
+			// fileIconImg.setImageDrawable(getResources().getDrawable(
+			// R.drawable.upload_ok));
+			// }
+			// else{
+			// fileIconImg.setImageDrawable(getResources().getDrawable(
+			// R.drawable.upload_notok));
+			// Toast.makeText(UploadActivity.this, "Error while uploading File",
+			// Toast.LENGTH_LONG).show();
+			// }
 		}
 
 	}

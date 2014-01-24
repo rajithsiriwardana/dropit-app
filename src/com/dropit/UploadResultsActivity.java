@@ -61,6 +61,12 @@ public class UploadResultsActivity extends Activity {
 			}
 		});
 	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent in = new Intent(UploadResultsActivity.this,UploadActivity.class);
+		startActivity(in);
+	}
 
 
 }

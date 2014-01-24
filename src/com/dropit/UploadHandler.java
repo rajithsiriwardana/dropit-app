@@ -96,7 +96,7 @@ public class UploadHandler {
 
 			status = true;
 		} catch (Exception e) {
-			Log.d("Pahan", "ERROR " + e.getMessage());
+			Log.d("Pahan", "ERROR upload " + e.getMessage());
 		}
 
 		return status;

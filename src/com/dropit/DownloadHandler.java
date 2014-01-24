@@ -38,8 +38,22 @@ public class DownloadHandler {
 
 		try {
 
-			ClientBootstrap clientBootstrap = ChannelHandler
-					.getChannelHandler().getClientBootstrap();
+//			ClientBootstrap clientBootstrap = ChannelHandler
+//					.getChannelHandler().getClientBootstrap();
+			
+			Executor bossPool = Executors.newCachedThreadPool();
+	        Executor workerPool = Executors.newCachedThreadPool();
+	        ChannelFactory channelFactory = new NioClientSocketChannelFactory(bossPool, workerPool);
+	        ChannelPipelineFactory pipelineFactory = new ChannelPipelineFactory() {
+	            public ChannelPipeline getPipeline() throws Exception {
+	                return Channels.pipeline(
+	                        new CompatibleObjectEncoder(), 
+	                        new CompatibleObjectDecoder(),//(ClassResolvers.cacheDisabled(getClass().getClassLoader())),//ObjectDecoder might not work if the client side is not using netty ObjectDecoder for decoding.
+	                        new ClientHandler());
+	            }
+	        };
+	        ClientBootstrap clientBootstrap = new ClientBootstrap(channelFactory);
+	        clientBootstrap.setPipelineFactory(pipelineFactory);
 			
 
 			InetSocketAddress addressToConnectTo = new InetSocketAddress(IP,

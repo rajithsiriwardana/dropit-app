@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkgrey"
     tools:context=".SearchActivity" >
-    
+
     <LinearLayout
         android:id="@+id/searchdownuploadBtn"
         android:layout_width="wrap_content"
@@ -31,8 +31,18 @@
             android:text="UPLOAD"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/green" />
-        
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/sideuploadsImg"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible"
+        android:src="@drawable/loading" />
 
     <ListView
         android:id="@android:id/list"
@@ -40,8 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/searchdownuploadBtn"
         android:layout_below="@+id/searchdownuploadBtn"
-        android:layout_margin="20dp">
-
+        android:layout_margin="20dp" >
     </ListView>
 
 </RelativeLayout>

@@ -32,7 +32,6 @@
         </activity>
         <activity
             android:name="com.dropit.UploadActivity"
-            android:noHistory="true"
             android:label="@string/title_activity_upload" >
         </activity>
         <activity

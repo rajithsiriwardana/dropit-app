@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
 
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.Channel;
@@ -16,6 +17,7 @@ import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
+import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
@@ -38,6 +40,7 @@ public class UploadResponseHandler extends SimpleChannelUpstreamHandler {
 		context = c;
 	}
 
+	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e)
 			throws Exception {
 
@@ -65,10 +68,19 @@ public class UploadResponseHandler extends SimpleChannelUpstreamHandler {
 		else if (method.equals(Utils.ACK_STORE_METHOD)) {
 			Log.d("Pahan", "Store successfully");
 			Intent in = new Intent(context, UploadResultsActivity.class);
+			in.putExtra("status", true);
 			context.startActivity(in);
 		}
 
 	}
+	
+	@Override
+    public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
+		Intent in = new Intent(context, UploadResultsActivity.class);
+		in.putExtra("status", false);
+		context.startActivity(in);
+        Channels.close(e.getChannel());
+    }
 	
 	private void sendMessageToFileServer(final DropItPacket packt, String ip,
 			int port) {
