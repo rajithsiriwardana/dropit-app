@@ -35,10 +35,12 @@ public class SearchResponseHandler extends SimpleChannelUpstreamHandler {
 					.getAttribute("SEARCH_RESULTS");
 			String suug = "";
 			for (int i = 0; i < suggestions.size() - 1; i++) {
-				suug += suggestions.get(i) + ",";
 				Log.d("Pahan", suggestions.get(i));
+				suug += suggestions.get(i) + ",";
 			}
+			
 			suug += suggestions.get(suggestions.size() - 1);
+			
 			Intent in = new Intent(context, SearchActivity.class);
 			in.putExtra("list", suug);
 			context.startActivity(in);

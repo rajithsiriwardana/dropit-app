@@ -62,11 +62,25 @@ public class DownloadResponseHandler extends SimpleChannelUpstreamHandler {
 
 		else if (method.equals(Utils.TRANSFER_METHOD)) {
 			String filename = String.valueOf(pkt.getAttribute("FILE_NAME"));
+			
+			String exits = String.valueOf(pkt.getAttribute("FILE_EXISTS"));
+			
+			Log.d("Pahan", ""+exits);
+			
+			if(exits.equalsIgnoreCase("TRUE")){
+				
 			writeToFile(filename, pkt.getData());
 			Log.d("Pahan", "Download successfully");
 			Intent in = new Intent(context, DownloadResultsActivity.class);
 			in.putExtra("status", true);
 			context.startActivity(in);
+			}
+			else{
+				Log.d("Pahan", "Fle not found in the server");
+				Intent in = new Intent(context, DownloadResultsActivity.class);
+				in.putExtra("status", false);
+				context.startActivity(in);
+			}
 		}
 
 	}

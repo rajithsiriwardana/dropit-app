@@ -67,6 +67,15 @@ public class UploadResponseHandler extends SimpleChannelUpstreamHandler {
 
 		else if (method.equals(Utils.ACK_STORE_METHOD)) {
 			Log.d("Pahan", "Store successfully");
+			
+			String filename = String.valueOf(pkt.getAttribute("FILE_NAME"));
+			
+			DropItPacket pac = new DropItPacket("ACK_FILE_SAVED");
+			pac.setAttribute(Utils.ATTR_FILENAME, filename);
+
+			Log.d("Pahan", "Request server acked");
+			sendMessageToFileServer(pac,Utils.IP,Utils.PORT);
+			
 			Intent in = new Intent(context, UploadResultsActivity.class);
 			in.putExtra("status", true);
 			context.startActivity(in);
