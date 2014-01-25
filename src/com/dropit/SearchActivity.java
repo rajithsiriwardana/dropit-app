@@ -38,37 +38,37 @@ public class SearchActivity extends ListActivity {
 		typeface = Typeface.createFromAsset(getAssets(), "fonts/hm.ttf");
 		downloadHandler = new DownloadHandler();
 
-		// Bundle extras = getIntent().getExtras();
+		Bundle extras = getIntent().getExtras();
 
-		// if (extras != null) {
-		String r = "text,dfdf,dfdfd,dfdssssssssss,aaa";// extras.getString("list");
-		String[] list = r.split(",");
+		if (extras != null) {
+			String r = extras.getString("list");
+			String[] list = r.split(",");
 
-		for (int i = 0; i < list.length; i++) {
-			Log.d("Pahan", list[i]);
-			resultList.add(list[i]);
+			for (int i = 0; i < list.length; i++) {
+				resultList.add(list[i]);
+			}
 		}
-		// }
 		init();
 	}
 
 	private void init() {
 		searchText = (TextView) findViewById(R.id.searchuloadTxt);
 		searchText.setTypeface(typeface);
-		
-		sideLoader = (ImageView)findViewById(R.id.sideuploadsImg);
+
+		sideLoader = (ImageView) findViewById(R.id.sideuploadsImg);
 		setListAdapter(new FileArrayAdapter(SearchActivity.this, resultList));
 
 	}
-	
+
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		
+
 		sideLoader.setVisibility(View.VISIBLE);
 		rotateAnimation(sideLoader);
 		String selectedValue = (String) getListAdapter().getItem(position);
-		Toast.makeText(this, "Please wait while downloading "+selectedValue, Toast.LENGTH_SHORT).show();
-		//downloadHandler.downloadFile(selectedValue);
+		Toast.makeText(this, "Please wait while downloading " + selectedValue,
+				Toast.LENGTH_SHORT).show();
+		downloadHandler.downloadFile(SearchActivity.this, selectedValue);
 	}
 
 	public class FileArrayAdapter extends ArrayAdapter<String> {
@@ -95,7 +95,7 @@ public class SearchActivity extends ListActivity {
 			return rowView;
 		}
 	}
-	
+
 	public void rotateAnimation(View v) {
 
 		RotateAnimation rotateAnimation = new RotateAnimation(0, 360,

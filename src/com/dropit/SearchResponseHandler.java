@@ -3,6 +3,8 @@ package com.dropit;
 import java.util.ArrayList;
 
 import org.jboss.netty.channel.ChannelHandlerContext;
+import org.jboss.netty.channel.Channels;
+import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 
@@ -43,4 +45,12 @@ public class SearchResponseHandler extends SimpleChannelUpstreamHandler {
 		}
 
 	}
+	
+	@Override
+    public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
+		Intent in = new Intent(context, DownloadResultsActivity.class);
+		in.putExtra("status", false);
+		context.startActivity(in);
+        Channels.close(e.getChannel());
+    }
 }

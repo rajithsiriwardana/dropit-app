@@ -16,6 +16,7 @@ import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
+import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
@@ -64,10 +65,19 @@ public class DownloadResponseHandler extends SimpleChannelUpstreamHandler {
 			writeToFile(filename, pkt.getData());
 			Log.d("Pahan", "Download successfully");
 			Intent in = new Intent(context, DownloadResultsActivity.class);
+			in.putExtra("status", true);
 			context.startActivity(in);
 		}
 
 	}
+	
+	@Override
+    public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
+		Intent in = new Intent(context, DownloadResultsActivity.class);
+		in.putExtra("status", false);
+		context.startActivity(in);
+        Channels.close(e.getChannel());
+    }
 
 	private void sendMessageToFileServer(final DropItPacket packt, String ip,
 			int port) {

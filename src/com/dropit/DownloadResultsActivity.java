@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,7 +21,9 @@ public class DownloadResultsActivity extends Activity {
 	private LinearLayout downloadBtn;
 	private LinearLayout uploadBtn;
 	private TextView statusTxt;
-	
+	private ImageView statusImg;
+	private boolean status = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,6 +31,7 @@ public class DownloadResultsActivity extends Activity {
 		setContentView(R.layout.activity_download_results);
 		typeface = Typeface.createFromAsset(getAssets(), "fonts/hm.ttf");
 		init();
+		setData();
 	}
 
 	private void init() {
@@ -61,6 +66,22 @@ public class DownloadResultsActivity extends Activity {
 				startActivity(in);
 			}
 		});
+	}
+
+	private void setData() {
+		statusImg = (ImageView) findViewById(R.id.drfileIconImg);
+
+		Bundle extras = getIntent().getExtras();
+
+		if (extras != null) {
+			status = extras.getBoolean("status");
+		}
+
+		if (!status) {
+			statusImg.setImageDrawable(getResources().getDrawable(
+					R.drawable.upload_notok));
+			statusTxt.setText("Error while downloading file");
+		}
 	}
 
 }

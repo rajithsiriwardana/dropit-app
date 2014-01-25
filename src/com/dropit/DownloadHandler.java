@@ -17,6 +17,7 @@ import org.jboss.netty.handler.codec.serialization.CompatibleObjectDecoder;
 import org.jboss.netty.handler.codec.serialization.CompatibleObjectEncoder;
 import com.anghiari.dropit.commons.DropItPacket;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -34,7 +35,7 @@ public class DownloadHandler {
 
 	}
 
-	public boolean downloadFile(String filename) {
+	public boolean downloadFile(final Context c, String filename) {
 
 		try {
 
@@ -49,7 +50,7 @@ public class DownloadHandler {
 	                return Channels.pipeline(
 	                        new CompatibleObjectEncoder(), 
 	                        new CompatibleObjectDecoder(),//(ClassResolvers.cacheDisabled(getClass().getClassLoader())),//ObjectDecoder might not work if the client side is not using netty ObjectDecoder for decoding.
-	                        new ClientHandler());
+	                        new DownloadResponseHandler(c));
 	            }
 	        };
 	        ClientBootstrap clientBootstrap = new ClientBootstrap(channelFactory);
