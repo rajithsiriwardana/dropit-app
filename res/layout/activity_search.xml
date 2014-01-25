@@ -6,7 +6,7 @@
     tools:context=".SearchActivity" >
 
     <LinearLayout
-        android:id="@+id/searchdownuploadBtn"
+        android:id="@+id/ssdownuploadBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -18,14 +18,14 @@
         android:padding="5dp" >
 
         <ImageView
-            android:id="@+id/searchuploadsImg"
+            android:id="@+id/ssuploadsImg"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:paddingRight="5dp"
             android:src="@drawable/upload" />
 
         <TextView
-            android:id="@+id/searchuloadTxt"
+            android:id="@+id/ssuloadTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UPLOAD"
@@ -33,24 +33,68 @@
             android:textColor="@color/green" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ssuDownloadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/ssdownloadImg"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/download" />
+
+        <TextView
+            android:id="@+id/ssdownloadTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOWNLOAD"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/sideuploadsImg"
         android:layout_width="62dp"
         android:layout_height="62dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:visibility="invisible"
         android:src="@drawable/loading" />
 
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/searchdownuploadBtn"
-        android:layout_below="@+id/searchdownuploadBtn"
-        android:layout_margin="20dp" >
-    </ListView>
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/ssuDownloadBtn"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp" >
+    </ListView> 
+
+
+    <TextView
+        android:id="@+id/listNullText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ssdownuploadBtn"
+        android:layout_centerHorizontal="true"
+        android:text="No Search Results Found"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:textColor="@color/yellow"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

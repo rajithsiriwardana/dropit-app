@@ -1,7 +1,6 @@
 package com.dropit;
 
 import java.io.File;
-
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -57,7 +56,6 @@ public class DownloadActivity extends Activity {
 
 		downloadBtn = (Button) findViewById(R.id.downloadBtntn);
 		downloadBtn.setTypeface(typeface);
-		
 
 		fileNameEditText = (EditText) findViewById(R.id.fileNameEditText);
 		fileNameEditText.setTypeface(typeface);
@@ -66,7 +64,14 @@ public class DownloadActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				new downloadTask().execute();
+				String filenameString = fileNameEditText.getText().toString();
+				if (!filenameString.isEmpty()) {
+					new downloadTask().execute();
+				}
+				else{
+					Toast.makeText(DownloadActivity.this, "Please enter file name", Toast.LENGTH_SHORT).show();
+				}
+
 			}
 		});
 
@@ -81,9 +86,14 @@ public class DownloadActivity extends Activity {
 				startActivity(in);
 			}
 		});
-		
+
 	}
 
+	@Override
+	public void onBackPressed() {
+		finish();
+	}
+	
 	class downloadTask extends AsyncTask<Void, Void, Void> {
 
 		@SuppressLint("NewApi")
@@ -91,9 +101,7 @@ public class DownloadActivity extends Activity {
 		protected Void doInBackground(Void... params) {
 
 			String filenameString = fileNameEditText.getText().toString();
-			if (!filenameString.isEmpty()) {
-				searchHandler.searchFile(DownloadActivity.this, filenameString);
-			}
+			searchHandler.searchFile(DownloadActivity.this, filenameString);
 
 			return null;
 		}
@@ -111,14 +119,14 @@ public class DownloadActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-//			dwloadIconImg.clearAnimation();
-//			fileNameEditText.setVisibility(View.VISIBLE);
-//			downloadBtn.setEnabled(true);
-//			downloadBtn.setText("Download and Save");
-//			dwloadIconImg.setImageDrawable(getResources().getDrawable(
-//					R.drawable.download2));
-//			Toast.makeText(DownloadActivity.this, "downloading finished..",
-//					Toast.LENGTH_SHORT).show();
+			// dwloadIconImg.clearAnimation();
+			// fileNameEditText.setVisibility(View.VISIBLE);
+			// downloadBtn.setEnabled(true);
+			// downloadBtn.setText("Download and Save");
+			// dwloadIconImg.setImageDrawable(getResources().getDrawable(
+			// R.drawable.download2));
+			// Toast.makeText(DownloadActivity.this, "downloading finished..",
+			// Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -134,5 +142,7 @@ public class DownloadActivity extends Activity {
 		rotateAnimation.setRepeatCount(Animation.INFINITE);
 		v.setAnimation(rotateAnimation);
 	}
+	
+
 
 }

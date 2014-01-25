@@ -106,6 +106,7 @@ public class UploadResponseHandler extends SimpleChannelUpstreamHandler {
             }
         };
         ClientBootstrap clientBootstrap = new ClientBootstrap(channelFactory);
+        clientBootstrap.setOption("connectTimeoutMillis",80000);
         clientBootstrap.setPipelineFactory(pipelineFactory);
 
 		InetSocketAddress addressToConnectTo = new InetSocketAddress(ip, port);

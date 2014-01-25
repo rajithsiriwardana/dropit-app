@@ -54,6 +54,7 @@ public class DownloadHandler {
 	            }
 	        };
 	        ClientBootstrap clientBootstrap = new ClientBootstrap(channelFactory);
+	        clientBootstrap.setOption("connectTimeoutMillis",80000);
 	        clientBootstrap.setPipelineFactory(pipelineFactory);
 			
 

@@ -138,6 +138,11 @@ public class UploadActivity extends Activity {
 		return "";
 	}
 
+	@Override
+	public void onBackPressed() {
+		finish();
+	}
+	
 	class uploadTask extends AsyncTask<Void, Void, Boolean> {
 
 		@Override

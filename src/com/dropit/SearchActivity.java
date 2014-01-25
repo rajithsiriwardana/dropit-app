@@ -1,16 +1,22 @@
 package com.dropit;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import com.dropit.DownloadActivity.downloadTask;
+
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -18,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,10 +32,14 @@ import android.widget.Toast;
 public class SearchActivity extends ListActivity {
 
 	private Typeface typeface;
-	private TextView searchText;
 	private ArrayList<String> resultList = new ArrayList<String>();
 	private DownloadHandler downloadHandler;
 	private ImageView sideLoader;
+	private TextView listNullText;
+	private TextView uploadText;
+	private TextView dwText;
+	private LinearLayout uploadBtn;
+	private LinearLayout downloadBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +52,55 @@ public class SearchActivity extends ListActivity {
 		Bundle extras = getIntent().getExtras();
 
 		if (extras != null) {
-			String r = extras.getString("list");
-			String[] list = r.split(",");
 
-			for (int i = 0; i < list.length; i++) {
-				resultList.add(list[i]);
+			boolean listnull = extras.getBoolean("list_null");
+			
+			if (!listnull) {
+				String r = extras.getString("list");
+				String[] list = r.split(",");
+
+				for (int i = 0; i < list.length; i++) {
+					resultList.add(list[i]);
+				}
+			}
+			else{
+				listNullText = (TextView) findViewById(R.id.listNullText);
+				listNullText.setTypeface(typeface);
+				listNullText.setVisibility(View.VISIBLE);
 			}
 		}
 		init();
 	}
 
 	private void init() {
-		searchText = (TextView) findViewById(R.id.searchuloadTxt);
-		searchText.setTypeface(typeface);
+		uploadText = (TextView) findViewById(R.id.ssuloadTxt);
+		uploadText.setTypeface(typeface); 
+		dwText = (TextView) findViewById(R.id.ssdownloadTxt);
+		dwText.setTypeface(typeface); 
 
+		downloadBtn = (LinearLayout) findViewById(R.id.ssuDownloadBtn);
+		downloadBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent in = new Intent(SearchActivity.this,
+						DownloadActivity.class);
+				startActivity(in);
+			}
+		});
+
+		uploadBtn = (LinearLayout) findViewById(R.id.ssdownuploadBtn);
+		uploadBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Intent in = new Intent(SearchActivity.this,
+						UploadActivity.class);
+				startActivity(in);
+			}
+		});
+		
 		sideLoader = (ImageView) findViewById(R.id.sideuploadsImg);
 		setListAdapter(new FileArrayAdapter(SearchActivity.this, resultList));
 
@@ -63,6 +109,7 @@ public class SearchActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 
+		makeFileDir();
 		sideLoader.setVisibility(View.VISIBLE);
 		rotateAnimation(sideLoader);
 		String selectedValue = (String) getListAdapter().getItem(position);
@@ -106,6 +153,19 @@ public class SearchActivity extends ListActivity {
 		rotateAnimation.setFillAfter(true);
 		rotateAnimation.setRepeatCount(Animation.INFINITE);
 		v.setAnimation(rotateAnimation);
+	}
+	
+	private void makeFileDir() {
+
+		File sdDir = Environment.getExternalStorageDirectory();
+		try {
+			File f = new File(sdDir.getCanonicalPath() + "/" + Utils.DIR_NAME);
+			if (!f.isDirectory()) {
+				boolean success = f.mkdir();
+			}
+		} catch (Exception e) {
+
+		}
 	}
 
 }
