@@ -33,6 +33,7 @@ public class DownloadActivity extends Activity {
 	private Button downloadBtn;
 	private EditText fileNameEditText;
 	private SearchHandler searchHandler;
+	private LinearLayout settingBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,18 @@ public class DownloadActivity extends Activity {
 
 				Intent in = new Intent(DownloadActivity.this,
 						UploadActivity.class);
+				startActivity(in);
+			}
+		});
+		
+		settingBtn = (LinearLayout) findViewById(R.id.dwsettingsBtn);
+		settingBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Intent in = new Intent(DownloadActivity.this,
+						SettingsActivity.class);
 				startActivity(in);
 			}
 		});

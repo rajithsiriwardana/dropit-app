@@ -32,6 +32,26 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/yellow" />
     </LinearLayout>
+    
+       <LinearLayout
+        android:id="@+id/upsettingsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/upsettimg"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:src="@drawable/setting_normal" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/fileSelectBtnLayout"

@@ -19,9 +19,11 @@ public class Utils {
 	public static String ATTR_NODEPORT = "NODE_PORT";
 	
 	public static String DIR_NAME = "Drop It";
+	public static String CONFIG_FILENAME = "config.txt";
 	
 	//public static String IP = "10.8.108.119";
 	//public static String IP = "192.168.43.173"; //234
 	public static String IP = "192.248.8.241";
 	public static int PORT = 8010; 
+	
 }

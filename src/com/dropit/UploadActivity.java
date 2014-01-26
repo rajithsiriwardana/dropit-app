@@ -34,6 +34,7 @@ public class UploadActivity extends Activity {
 	private LinearLayout downloadBtn;
 	private ImageView fileIconImg;
 	private UploadHandler uploadHandler;
+	private LinearLayout settingBtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,19 @@ public class UploadActivity extends Activity {
 				startActivity(in);
 			}
 		});
+		
+		settingBtn = (LinearLayout) findViewById(R.id.upsettingsBtn);
+		settingBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Intent in = new Intent(UploadActivity.this,
+						SettingsActivity.class);
+				startActivity(in);
+			}
+		});
+
 	}
 
 	@Override

@@ -1,0 +1,114 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="@color/darkgrey"
+    tools:context=".SettingsActivity" >
+    
+    <LinearLayout
+        android:id="@+id/setdownuploadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/setuploadsImg"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/upload" />
+
+        <TextView
+            android:id="@+id/setuloadTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UPLOAD"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/green" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setuDownloadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:padding="5dp" >
+
+        <ImageView
+            android:id="@+id/setdownloadImg"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/download" />
+
+        <TextView
+            android:id="@+id/setdownloadTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOWNLOAD"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setwasawas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical" >
+        
+        <ImageView
+            android:id="@+id/dmIconImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/settings" />
+
+        <TextView
+            android:id="@+id/settEdittEXTinto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="Set IP and PORT for Manual configuations (IP:PORT)"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/settiandportEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#44e5e5e5"
+            android:ems="10"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/settsaveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:background="@color/blue"
+            android:padding="10dp"
+            android:text="SAVE"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>
